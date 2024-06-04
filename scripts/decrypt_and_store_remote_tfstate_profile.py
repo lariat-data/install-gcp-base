@@ -9,7 +9,7 @@ LARIAT_KEYS_FILE = "keys.json"
 LARIAT_KEYS_ENC_FILE = "keys.enc"
 LARIAT_TERRAFORM_BUCKET_NAME = "lariat-customer-installation-tfstate"
 CROSS_ACCOUNT_ROLE_BASE_ARN = (
-    "arn:aws:iam::358681817243:role/lariat-iam-terraform-cross-account-access-role"
+    "arn:aws:iam::358681817243:role/lariat-tcar"
 )
 
 def get_and_decrypt_keypair(gcp_org_id):
