@@ -12,7 +12,7 @@ CROSS_ACCOUNT_ROLE_BASE_ARN = (
     "arn:aws:iam::358681817243:role/lariat-iam-terraform-cross-account-access-role"
 )
 
-def get_and_decrypt_keypair(gcp_org_id, gcp_proj_id):
+def get_and_decrypt_keypair(gcp_org_id):
     # Create a client for the STS service
     sts_client = boto3.client(
         "sts",
@@ -22,7 +22,7 @@ def get_and_decrypt_keypair(gcp_org_id, gcp_proj_id):
     )
 
     # Assume the cross-account role
-    role_arn = f"{CROSS_ACCOUNT_ROLE_BASE_ARN}-{gcp_org_id}-{gcp_proj_id}"
+    role_arn = f"{CROSS_ACCOUNT_ROLE_BASE_ARN}-{gcp_org_id}"
     session_name = "terraform-s3-session-" + gcp_org_id
     response = sts_client.assume_role(RoleArn=role_arn, RoleSessionName=session_name)
 
@@ -38,5 +38,4 @@ def get_and_decrypt_keypair(gcp_org_id, gcp_proj_id):
 
 if __name__ == "__main__":
     gcp_org_id = sys.argv[1]
-    gcp_proj_id = sys.argv[2]
-    get_and_decrypt_keypair(gcp_org_id, gcp_proj_id)
+    get_and_decrypt_keypair(gcp_org_id)
